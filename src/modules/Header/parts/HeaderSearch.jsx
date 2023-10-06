@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { propertyAPI } from "../../../api/propertyApi";
 import useOnChange from "../../../hooks/useOnChange";
 import useDebounce from "../../../hooks/useDebounce";
-import Hamster from "../../../components/loading/hamster/hamster";
+import Hamster from "../../../components/loading/hamster/Hamster..jsx";
 import SearchItem from "./SearchItem";
 import IconX from "../../../components/icon/IconX";
 
