@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { propertyAPI } from "../../api/propertyApi";
 import PropertyHeader from "./parts/PropertyHeader";
 
-const PropertyCard = ({ item }) => {
+const PropertyCard = ({ item, edit = false }) => {
   const {
     districtPrefix,
     provincePrefix,
@@ -32,52 +32,74 @@ const PropertyCard = ({ item }) => {
     navigate(`/properties/${id}`);
     window.scrollTo(0, 0);
   };
-  return (
-    <div
-      className="flex flex-col h-full p-3 transition-all bg-white dark:bg-softDark shadow-md cursor-pointer select-none lg:rounded-lg text-secondary hover:shadow-neutral-400"
-      onClick={handleClickNavigate}
-    >
-      <img
-        src={
-          propertyCoverPaths?.length > 0
-            ? propertyAPI.propertyImage(propertyCoverPaths[0])
-            : propertyAPI.defaultImage
-        }
-        alt=""
-        className="w-full h-[250px] object-cover rounded-lg shadow-sm hover:shadow-neutral-300  transition-all  mb-5"
-      ></img>
 
-      <div className="flex flex-col flex-1">
-        <div className="flex justify-between gap-4 mb-3 dark:text-white">
-          <PropertyHeader>{propertyPostingStatus}</PropertyHeader>
-          <span className="font-semibold text-xl w-[100px] font-serif dark:text-white">
-            {propertyPrice} tỷ
-          </span>
-        </div>
-        <div className="flex flex-col justify-between text-start gap-4">
-          <span className="text-[#ADB8CC] dark:text-text4  font-medium text-sm">
-            {propertyAddressNumber} {propertyAddressStreet}, {districtName},{" "}
-            {provinceName}
-          </span>
-          <div className="flex items-center dark:text-text4 font-light gap-x-3">
-            <FontAwesomeIcon icon={faBed} />
-            <span> {propertyBedrooms}</span>
-            <FontAwesomeIcon icon={faBathtub} />
-            <span> {propertyBathrooms}</span>
-            <span>
-              <FontAwesomeIcon icon={faHouseChimney} className="mr-2" />
-              {propertyArea}m<sup>2</sup>
-            </span>
+  const handleClickNavigateEdit = () => {
+    navigate(`/properties/edit/${id}`);
+    window.scrollTo(0, 0);
+  };
+  return (
+    <>
+      <div className="flex flex-col h-full p-3 transition-all bg-white dark:bg-softDark shadow-md cursor-pointer select-none lg:rounded-lg text-secondary hover:shadow-neutral-400">
+        <div onClick={handleClickNavigate}>
+          <img
+            src={
+              propertyCoverPaths?.length > 0
+                ? propertyAPI.propertyImage(propertyCoverPaths[0])
+                : propertyAPI.defaultImage
+            }
+            alt=""
+            className="w-full h-[250px] object-cover rounded-lg shadow-sm hover:shadow-neutral-300  transition-all  mb-5"
+          ></img>
+
+          <div className="flex flex-col flex-1">
+            <div className="flex justify-between gap-4 mb-3 dark:text-white">
+              <PropertyHeader>{propertyPostingStatus}</PropertyHeader>
+              <span className="font-semibold text-xl w-[100px] font-serif dark:text-white">
+                {propertyPrice} tỷ
+              </span>
+            </div>
+            <div className="flex flex-col justify-between text-start gap-4">
+              <span className="text-[#ADB8CC] dark:text-text4  font-medium text-sm">
+                {propertyAddressNumber} {propertyAddressStreet}, {districtName},{" "}
+                {provinceName}
+              </span>
+              <div className="flex items-center dark:text-text4 font-light gap-x-3">
+                <FontAwesomeIcon icon={faBed} />
+                <span> {propertyBedrooms}</span>
+                <FontAwesomeIcon icon={faBathtub} />
+                <span> {propertyBathrooms}</span>
+                <span>
+                  <FontAwesomeIcon icon={faHouseChimney} className="mr-2" />
+                  {propertyArea}m<sup>2</sup>
+                </span>
+              </div>
+              <h3
+                className={`font-medium text-[#ADB8CC] dark:text-graySoft text-sm`}
+              >
+                Ngày đăng:{" "}
+                {createdDate === null ? "Không có dữ liệu" : `${createdDate}`}
+              </h3>
+            </div>
           </div>
-          <h3
-            className={`font-medium text-[#ADB8CC] dark:text-graySoft text-sm`}
-          >
-            Ngày đăng:{" "}
-            {createdDate === null ? "Không có dữ liệu" : `${createdDate}`}
-          </h3>
         </div>
+        {edit && (
+          <div className="flex gap-4">
+            <button
+              onClick={handleClickNavigateEdit}
+              className="mt-3 bg-purple w-full rounded-lg px-4 py-2 z-50 hover:bg-violet-400 text-white"
+            >
+              Edit
+            </button>
+            <button className="mt-3 bg-green w-full rounded-lg px-4 py-2 z-50 hover:bg-violet-400 text-white">
+              Images
+            </button>
+            <button className="mt-3 bg-error w-full rounded-lg px-4 py-2 z-50 hover:bg-violet-400 text-white">
+              Delete
+            </button>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

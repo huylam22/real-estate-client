@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import ImageUpload from "../../components/image/ImageUpload";
-
-import Button from "../../components/button/Button";
 import { useParams } from "react-router-dom";
 
 const PropertyAddImage = () => {
   const { propertyId } = useParams();
-  console.log(propertyId);
+  // console.log(propertyId);
 
   return (
     <div className="p-10">

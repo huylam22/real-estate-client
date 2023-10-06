@@ -1,16 +1,17 @@
+import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
+import Highlighter from "react-highlight-words";
+import { toast } from "react-toastify";
+import { SwiperSlide } from "swiper/react";
+import { propertyAPI } from "../api/propertyApi";
+import SwiperComp from "../components/swiper/SwiperComp";
 import LayoutHome from "../layouts/LayoutHome";
+import PropertyCard from "../modules/Property/PropertyCard";
+import PropertyCardLoading from "../modules/Property/PropertyCardLoading";
 import Introduction from "../modules/home/Introduction";
 import OurStory from "../modules/home/OurStory";
-import PropertyCardLoading from "../modules/Property/PropertyCardLoading";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { propertyAPI } from "../api/propertyApi";
-import PropertyCard from "../modules/Property/PropertyCard";
-import SwiperComp from "../components/swiper/SwiperComp";
-import { SwiperSlide } from "swiper/react";
-import { motion } from "framer-motion";
-import Highlighter from "react-highlight-words";
+
 const landType = ["All", "Apartment", "House"];
 
 const HomePage = () => {
@@ -29,7 +30,7 @@ const HomePage = () => {
         }
         const res = await axios.get(propertyAPI.getProperties(category));
         const { data } = res;
-        console.log(data);
+        // console.log(data);
         setProperties(data);
         setIsLoading(false);
       } catch (error) {

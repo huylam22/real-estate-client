@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
-import LayoutHome from "../layouts/LayoutHome";
-import PropertyList from "../modules/Property/list/PropertyList";
-import { useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { propertyAPI } from "../api/propertyApi";
 import useQuery from "../hooks/useQuery";
+import LayoutHome from "../layouts/LayoutHome";
+import PropertyList from "../modules/Property/list/PropertyList";
 
 const PropertyListPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ const PropertyListPage = () => {
           propertyAPI.getProperties(landType, searchQuery, page)
         );
         const { data } = res;
-        console.log(data);
+        // console.log(data);
         setProperties(data);
         setIsLoading(false);
         setPageCount(data.totalPages);

@@ -2,11 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { propertyAPI } from "../../../api/propertyApi";
-import useOnChange from "../../../hooks/useOnChange";
-import useDebounce from "../../../hooks/useDebounce";
-import Hamster from "../../../components/loading/hamster/Hamster.jsx";
-import SearchItem from "./SearchItem";
 import IconX from "../../../components/icon/IconX";
+import Hamster from "../../../components/loading/hamster/Hamster.jsx";
+import useDebounce from "../../../hooks/useDebounce";
+import SearchItem from "./SearchItem";
 
 const HeaderSearch = () => {
   const [showSearch, setShowSearch] = useState(false);
@@ -38,7 +37,7 @@ const HeaderSearch = () => {
           const response = await axios.get(
             propertyAPI.getPropertiesSearch(debounceQuery)
           );
-          console.log(response);
+          // console.log(response);
           setLoading(false);
           setSearchResults(response.data.content);
         } catch (error) {

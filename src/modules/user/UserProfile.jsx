@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { propertyAPI } from "../../api/propertyApi";
-import Card from "./parts/Card";
-import PropertyList from "../Property/list/PropertyList";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import UserCard from "./parts/UserCard";
-import { useSelector } from "react-redux";
-import useQuery from "../../hooks/useQuery";
 import { useSearchParams } from "react-router-dom";
+import AvatarImageUpload from "../../components/image/AvartaImageUpload";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useQuery from "../../hooks/useQuery";
+import PropertyList from "../Property/list/PropertyList";
+import UserInfoInput from "./UserInfoInput";
+import UserCard from "./parts/UserCard";
 
 const UserProfile = ({ item }) => {
   const axiosPrivate = useAxiosPrivate();
@@ -15,8 +14,9 @@ const UserProfile = ({ item }) => {
   const [pageCount, setPageCount] = useState(0);
   const [userProperties, setUserProperties] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [setSearchParams] = useSearchParams();
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [showEditAvatar, setShowEditAvatar] = useState(false);
 
   const query = useQuery();
   let page = query.get("page") || 0;
@@ -29,7 +29,9 @@ const UserProfile = ({ item }) => {
 
   useEffect(() => {
     try {
-      fecthUserProfile();
+      setTimeout(() => {
+        fecthUserProfile();
+      }, 200);
     } catch (e) {
       console.log(e);
     }
@@ -51,6 +53,7 @@ const UserProfile = ({ item }) => {
       console.log(e);
     }
   }, [userProfile, currentPage]);
+
   const handleReloadClick = () => {
     setLoading(true);
     fecthUserProfile(); // Call the function to fetch user profile data again
@@ -80,8 +83,12 @@ const UserProfile = ({ item }) => {
   };
 
   const handleEditProfile = () => {
-    setShowEditProfile(true);
+    setShowEditProfile((prev) => !prev);
   };
+  const handleEditAvatar = () => {
+    setShowEditAvatar((prev) => !prev);
+  };
+
   return (
     <div className="w-full lg:max-w-[1440px] px-4 mx-auto">
       <div className="relative flex flex-col min-w-0 break-words bg-inherit w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -90,12 +97,38 @@ const UserProfile = ({ item }) => {
             <UserCard item={userProfile}></UserCard>
           </div>
         </div>
-        <button
-          className="bg-green max-w-[400px] mx-auto w-full rounded-lg px-4 py-2 text-white mt-6 hover:bg-emerald-400"
-          onClick={handleEditProfile}
-        >
-          Edit your profile
-        </button>
+        <div className="flex items-center justify-center gap-x-5">
+          <button
+            className="bg-purple max-w-[190px] w-full rounded-lg px-4 py-2 text-white mt-6 hover:bg-emerald-400"
+            onClick={handleEditAvatar}
+          >
+            Edit your avatar
+          </button>
+          <button
+            className="bg-green max-w-[190px] w-full rounded-lg px-4 py-2 text-white mt-6 hover:bg-emerald-400"
+            onClick={handleEditProfile}
+          >
+            Edit your profile
+          </button>
+        </div>
+
+        {showEditAvatar && (
+          <>
+            <div className="my-6 border-b border-blueGray-200 text-center"></div>
+            <AvatarImageUpload></AvatarImageUpload>
+            <button
+              className="bg-error max-w-[400px] mx-auto w-full rounded-lg px-4 py-2 text-white mt-4 hover:bg-emerald-400"
+              onClick={handleEditAvatar}
+            >
+              Close Edit Avatar
+            </button>
+          </>
+        )}
+        {showEditProfile && (
+          <>
+            <UserInfoInput></UserInfoInput>
+          </>
+        )}
         <div className="mt-6 border-b border-blueGray-200 text-center"></div>
 
         <div className="flex flex-col items-center justify-center">
@@ -103,6 +136,7 @@ const UserProfile = ({ item }) => {
             Your listing(s)
           </h1>
           <PropertyList
+            edit={true}
             item={userProperties}
             className="pt-0"
             isLoading={loading}

@@ -1,19 +1,18 @@
-import React from "react";
-import LayoutHome from "../layouts/LayoutHome";
-import { useForm } from "react-hook-form";
-import LayoutAuthentication from "../layouts/LayoutAuthentication";
-import ButtonGoogle from "../components/button/ButtonGoogle";
-import { Link } from "react-router-dom";
-import { Label } from "../components/label";
-import { Input } from "../components/input";
-import { IconEyeToggle } from "../components/icon";
-import FormGroup from "../components/common/FormGroup";
-import useToggleValue from "../hooks/useToggleValue";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Checkbox } from "../components/checkbox";
-import Button from "../components/button/Button";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import * as yup from "yup";
+import Button from "../components/button/Button";
+import ButtonGoogle from "../components/button/ButtonGoogle";
+import { Checkbox } from "../components/checkbox";
+import FormGroup from "../components/common/FormGroup";
+import { IconEyeToggle } from "../components/icon";
+import { Input } from "../components/input";
+import { Label } from "../components/label";
+import useToggleValue from "../hooks/useToggleValue";
+import LayoutAuthentication from "../layouts/LayoutAuthentication";
 import { authRegister } from "../store/auth/auth-slice";
 
 const schema = yup.object({

@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { propertyAPI } from "../../api/propertyApi";
 import { getToken } from "../../utils/auth";
 import IconX from "../icon/IconX";
-import { useNavigate } from "react-router-dom";
 
-const ImageUpload = ({ onChange = () => {}, name = "", propertyId }) => {
+const ImageUpload = ({ onChange = () => {}, propertyId }) => {
   const { access_token } = getToken();
   const [selectedImages, setSelectedImages] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -45,7 +45,7 @@ const ImageUpload = ({ onChange = () => {}, name = "", propertyId }) => {
             Authorization: `Bearer ${access_token}`,
           },
           onUploadProgress: (progressEvent) => {
-            console.log(progressEvent);
+            // console.log(progressEvent);
             const percentCompleted = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
@@ -55,7 +55,7 @@ const ImageUpload = ({ onChange = () => {}, name = "", propertyId }) => {
       );
 
       // Handle the response as needed, e.g., show a success message
-      console.log(response);
+      // console.log(response);
       toast.success("Image(s) uploaded successfully!");
       setUploadProgress(0); // Reset upload progress after successful upload
       navigate(`/properties/${propertyId}`);

@@ -6,6 +6,7 @@ import {
   faBathtub,
   faHouseChimney,
 } from "@fortawesome/free-solid-svg-icons";
+
 const PropertyCardLoading = () => {
   return (
     <div className="bg-white dark:bg-darkSoft p-3 rounded-xl shadow-sm flex flex-col">

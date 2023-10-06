@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Modal from "react-modal";
-import LayoutHome from "./layouts/LayoutHome";
 import HomePage from "./pages/HomePage";
 import PropertyListPage from "./pages/PropertyListPage";
 import PropertyViewPage from "./pages/PropertyViewPage";
@@ -16,6 +15,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import { authRefreshToken, authUpdateUser } from "./store/auth/auth-slice";
 import { getToken } from "./utils/auth";
 import NotFoundErrorPage from "./pages/NotFoundErrorPage";
+import PropertyEditPage from "./pages/EditPropertyPage";
 Modal.setAppElement("#root");
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (user) {
-      console.log("user");
+      // console.log("user");
     } else {
       const { refresh_token } = getToken();
 
@@ -50,11 +50,15 @@ function App() {
           element={<PropertyViewPage></PropertyViewPage>}
         ></Route>
         <Route
-          path="/new-property"
+          path="/properties/edit/:propertyId"
+          element={<PropertyEditPage></PropertyEditPage>}
+        ></Route>
+        <Route
+          path="/add-property"
           element={<StartPropertyPage></StartPropertyPage>}
         ></Route>
         <Route
-          path="/new-property/:propertyId"
+          path="/add-property/:propertyId"
           element={<PropertyAddImagePage></PropertyAddImagePage>}
         ></Route>
         <Route
@@ -71,58 +75,3 @@ function App() {
 }
 
 export default App;
-
-// import { Routes, Route } from "react-router-dom";
-// import "./App.css";
-
-// import { useDispatch, useSelector } from "react-redux";
-// import { Suspense, lazy, useEffect } from "react";
-// import { authRefreshToken, authUpdateUser } from "./store/auth/auth-slice";
-// import { getToken, logOut } from "./utils/auth";
-// const StartPropertyPage = lazy(() => import("./pages/StartPropertyPage"));
-// const LayoutHome = lazy(() => import("./layouts/LayoutHome"));
-// const HomePage = lazy(() => import("./pages/HomePage"));
-// const PropertyListPage = lazy(() => import("./pages/PropertyListPage"));
-// const PropertyView = lazy(() => import("./pages/PropertyViewPage"));
-// const SignUpPage = lazy(() => import("./pages/SignUpPage"));
-// const SignInPage = lazy(() => import("./pages/SignInPage"));
-// function App() {
-//   const { user } = useSelector((state) => state.auth);
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     if (user) {
-//     } else {
-//       const { refresh_token } = getToken();
-//       if (refresh_token) {
-//         dispatch(authRefreshToken(refresh_token));
-//       } else {
-//         dispatch(authUpdateUser({}));
-//         logOut();
-//       }
-//     }
-//   }, [dispatch, user]);
-//   return (
-//     <Suspense>
-//       <Routes>
-//         <Route path="/" element={<HomePage></HomePage>}></Route>
-//         <Route path="/sign-up" element={<SignUpPage></SignUpPage>}></Route>
-//         <Route path="/sign-in" element={<SignInPage></SignInPage>}></Route>
-//         <Route
-//           path="/properties"
-//           element={<PropertyListPage></PropertyListPage>}
-//         ></Route>
-//         <Route
-//           path="/new-property"
-//           element={<StartPropertyPage></StartPropertyPage>}
-//         ></Route>
-//         <Route
-//           path="/properties/:propertyId"
-//           element={<PropertyView></PropertyView>}
-//         ></Route>
-//         <Route path="*" element={<LayoutHome>Not Found</LayoutHome>}></Route>
-//       </Routes>
-//     </Suspense>
-//   );
-// }
-
-// export default App;

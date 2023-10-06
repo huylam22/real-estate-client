@@ -1,10 +1,11 @@
 import Cookies from "js-cookie";
 
+const domain = "master.dct2mhtymjoyx.amplifyapp.com";
 const accessTokenKey = "app_access_token";
 const refreshTokenKey = "app_refresh_token";
 const objectCookies = {
   expires: 30,
-  domain: "master.dct2mhtymjoyx.amplifyapp.com",
+  domain: domain,
 };
 
 export const saveToken = (access_token, refresh_token) => {
@@ -15,12 +16,12 @@ export const saveToken = (access_token, refresh_token) => {
     Cookies.remove(accessTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: "master.dct2mhtymjoyx.amplifyapp.com",
+      domain: domain,
     });
     Cookies.remove(refreshTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: "master.dct2mhtymjoyx.amplifyapp.com",
+      domain: domain,
     });
   }
 };
@@ -37,12 +38,12 @@ export const logOut = () => {
     Cookies.remove(accessTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: "master.dct2mhtymjoyx.amplifyapp.com",
+      domain: domain,
     });
     Cookies.remove(refreshTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: "master.dct2mhtymjoyx.amplifyapp.com",
+      domain: domain,
     });
   }
 };

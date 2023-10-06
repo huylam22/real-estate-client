@@ -1,7 +1,7 @@
-import React from "react";
-import { useController } from "react-hook-form";
 import PropTypes from "prop-types";
+import React from "react";
 import { withErrorBoundary } from "react-error-boundary";
+import { useController } from "react-hook-form";
 import ErrorComponent from "../common/ErrorComponent";
 
 const Input = (props) => {
@@ -12,7 +12,7 @@ const Input = (props) => {
     error = "",
     placeholder = "",
     children,
-
+    value,
     ...rest
   } = props;
   const { field } = useController({
@@ -34,6 +34,7 @@ const Input = (props) => {
               : "border-darkStroke text-text1"
           }
           ${children ? "pr-16" : ""}`}
+        value={value}
         {...rest}
         {...field}
       />

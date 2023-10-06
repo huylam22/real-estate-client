@@ -1,19 +1,21 @@
 import "react-datepicker/dist/react-datepicker.css";
-import "react-quill/dist/quill.snow.css";
 import "./date-picker.scss";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import "react-quill/dist/quill.snow.css";
+
+import { Input, TextArea } from "../../components/input";
+import { Label } from "../../components/label";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import { instance } from "../../api/axios";
 import FormGroup from "../../components/common/FormGroup";
 import FormRow from "../../components/common/FormRow";
-import { Input, TextArea } from "../../components/input";
-import { Label } from "../../components/label";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import Button from "../../components/button/Button";
 import { Dropdown } from "../../components/dropdown";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const legalStatus = ["Owner", "Agent", "Co-Owned"];
 const landDirection = ["North", "South", "East", "West"];
@@ -30,7 +32,7 @@ const landType = [
   "Resort",
   "Other",
 ];
-const PropertyAddNew = () => {
+const PropertyEdit = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
@@ -56,11 +58,11 @@ const PropertyAddNew = () => {
     delete values["district"];
     try {
       const response = await axiosPrivate.post(
-        `api/v1/properties/create/${provinceId}/${districtId}/${auth.user.id}`,
+        `api/v1/properties/update/${provinceId}/${districtId}/${auth.user.id}`,
         values
       );
       // console.log(response);
-      toast.success("Add new property successfully");
+      toast.success("Edit property successfully");
       if (response.status === 201) {
         navigate(`/add-property/${response.data.id}`);
       }
@@ -108,7 +110,7 @@ const PropertyAddNew = () => {
     <div className="bg-white dark:bg-inherit rounded-xl py-10 px-[66px]">
       <div className="text-center">
         <h1 className="py-4 font-bold  px-14 text-text2 bg-text4 dark:bg-softDark dark:text-white bg-opacity-5 rounded-xl text-[25px] inline-block mb-10">
-          List Your Property 🏠🏡
+          Edit Your Property 🏠🏡
         </h1>
       </div>
       <form onSubmit={handleSubmit(handleAddNewCampaign)}>
@@ -378,4 +380,4 @@ const PropertyAddNew = () => {
   );
 };
 
-export default PropertyAddNew;
+export default PropertyEdit;

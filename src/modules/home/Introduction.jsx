@@ -8,7 +8,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { backgroundImage } from "../../constants/global";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Hamster from "../../components/loading/hamster/Hamster.jsx";
 import Title from "./parts/Title";

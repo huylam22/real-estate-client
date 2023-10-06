@@ -1,14 +1,14 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { propertyAPI } from "../api/propertyApi";
-import PropertyInfo from "../modules/Property/view/PropertyInfo";
-import LayoutHome from "../layouts/LayoutHome";
-import axios from "axios";
 import { SwiperSlide } from "swiper/react";
-import SwiperComp from "../components/swiper/SwiperComp";
-import PropertyCardLoading from "../modules/Property/PropertyCardLoading";
-import PropertyCard from "../modules/Property/PropertyCard";
+import { propertyAPI } from "../api/propertyApi";
 import ModalImage from "../components/modal/ModalImage";
+import SwiperComp from "../components/swiper/SwiperComp";
+import LayoutHome from "../layouts/LayoutHome";
+import PropertyCard from "../modules/Property/PropertyCard";
+import PropertyCardLoading from "../modules/Property/PropertyCardLoading";
+import PropertyInfo from "../modules/Property/view/PropertyInfo";
 import PropertyInfoLoading from "../modules/Property/view/PropertyInfoLoading";
 import UserCard from "../modules/user/parts/UserCard";
 
@@ -31,7 +31,7 @@ const PropertyViewPage = () => {
     async function getPropertyDetail() {
       try {
         const res = await axios.get(propertyAPI.getPropertyDetail(propertyId));
-        console.log(res);
+        // console.log(res);
         setData(res.data);
         setLoading(false);
 
@@ -75,7 +75,6 @@ const PropertyViewPage = () => {
                     src={propertyAPI.propertyImage(item)}
                     onClick={(e) => {
                       setOpenModal(true);
-                      console.log(idx);
                       setClickedIndex(idx);
                     }}
                   />

@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-import { withErrorBoundary } from "react-error-boundary";
-import ErrorComponent from "../components/common/ErrorComponent";
+import { motion } from "framer-motion";
 import PropType from "prop-types";
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import { withErrorBoundary } from "react-error-boundary";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import ErrorComponent from "../components/common/ErrorComponent";
+
 const LayoutAuthentication = (props) => {
   const { children, heading } = props;
   const { user } = useSelector((state) => state.auth);

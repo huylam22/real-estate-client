@@ -1,18 +1,18 @@
 import React from "react";
 import LayoutHome from "../layouts/LayoutHome";
-import PropertyAddNew from "../modules/Property/PropertyAddNew";
 import RequiredAuthPage from "./RequiredAuthPage";
+import PropertyEdit from "../modules/Property/PropertyEdit";
 
-const StartPropertyPage = () => {
+const PropertyEditPage = () => {
   return (
     <LayoutHome>
       <RequiredAuthPage>
         <div className="mt-7">
-          <PropertyAddNew></PropertyAddNew>
+          <PropertyEdit></PropertyEdit>
         </div>
       </RequiredAuthPage>
     </LayoutHome>
   );
 };
 
-export default StartPropertyPage;
+export default PropertyEditPage;

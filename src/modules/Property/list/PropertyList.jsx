@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import ReactPaginate from "react-paginate";
 
 const PropertyList = ({
+  edit,
   isLoading,
   handlePageClick,
   item,
@@ -40,7 +41,11 @@ const PropertyList = ({
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  <PropertyCard key={item.id} item={item}></PropertyCard>
+                  <PropertyCard
+                    edit={edit}
+                    key={item.id}
+                    item={item}
+                  ></PropertyCard>
                 </motion.div>
               ))}
           </div>

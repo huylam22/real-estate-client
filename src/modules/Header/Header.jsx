@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import ToggleMobileMenu from "./parts/ToggleMobileMenu";
-import HeaderSearch from "./parts/HeaderSearch";
-import Button from "../../components/button/Button";
 import { useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import Button from "../../components/button/Button";
 import UserDropDown from "../user/UserDropDown";
+import HeaderSearch from "./parts/HeaderSearch";
+import ToggleMobileMenu from "./parts/ToggleMobileMenu";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -81,7 +81,7 @@ const Header = () => {
                 id="btn"
                 className="px-4 py-2 button-effect"
                 onClick={() => {
-                  navigate("/new-property");
+                  navigate("/add-property");
                 }}
               >
                 Post Your Property

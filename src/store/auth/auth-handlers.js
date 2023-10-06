@@ -57,7 +57,7 @@ function* handleAuthLogin(action) {
 function* handleAuthRefreshToken({ payload }) {
   try {
     const response = yield call(requestAuthRefreshToken, payload);
-    console.log(response);
+    // console.log(response);
     if (response) {
       saveToken(response.data.access_token, response.data.refresh_token);
       yield put(
