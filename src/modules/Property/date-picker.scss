@@ -1,0 +1,50 @@
+// custom date picker
+.react-datepicker-wrapper {
+  border-width: 1px;
+  border-style: solid;
+  @apply w-full px-6 py-4 font-medium border rounded-xl font-primary bg-transparent dark:border-darkStroke placeholder:text-text4 dark:placeholder:text-text2 dark:text-white placeholder:font-normal border-strock text-text1;
+  height: 54px;
+  ::placeholder {
+    @apply font-primary text-base font-normal text-text4 dark:text-text2;
+  }
+}
+
+.react-datepicker {
+  @apply rounded-xl border border-strock font-primary p-2;
+}
+
+.react-datepicker__input-container input {
+  @apply w-full font-primary cursor-pointer;
+}
+.react-datepicker__header {
+  @apply bg-white;
+}
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover,
+.react-datepicker__year-text:hover {
+  @apply bg-transparent text-primary;
+}
+
+.react-datepicker__day:active,
+.react-datepicker__month-text:active,
+.react-datepicker__quarter-text:active,
+.react-datepicker__year-text:active {
+  @apply bg-primary text-white;
+}
+
+.react-datepicker__day--selected {
+  @apply bg-primary text-white;
+}
+
+.react-datepicker__day--today {
+  @apply bg-transparent text-secondary;
+}
+
+.react-datepicker__close-icon::after {
+  @apply bg-error;
+}
+
+.react-datepicker__portal {
+  @apply bg-black bg-opacity-20;
+}
