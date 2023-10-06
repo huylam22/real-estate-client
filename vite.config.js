@@ -10,8 +10,12 @@ export default defineConfig({
       process.env.VITE_AWS_S3_BUCKET_DOMAIN
     ),
   },
-  server: {
-    open: true,
-    origin: "http://localhost:8080",
+  build: {
+    // generate manifest.json in outDir
+    manifest: true,
+    rollupOptions: {
+      // overwrite default .html entry
+      input: "/path/to/main.js",
+    },
   },
 });
