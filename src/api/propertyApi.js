@@ -1,5 +1,5 @@
-// export const apiURL = "https://real-estate-production-acd8.up.railway.app/";
-export const apiURL = "http://localhost:8080/";
+export const apiURL = "https://real-estate-production-acd8.up.railway.app/";
+// export const apiURL = "http://localhost:8080/";
 
 export const propertyAPI = {
   getPropertyDetail: (propertyId, type) =>
