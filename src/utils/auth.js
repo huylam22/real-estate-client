@@ -4,7 +4,7 @@ const accessTokenKey = "app_access_token";
 const refreshTokenKey = "app_refresh_token";
 const objectCookies = {
   expires: 30,
-  domain: import.meta.env.COOKIE_DOMAIN,
+  domain: "https://master.dct2mhtymjoyx.amplifyapp.com",
 };
 
 export const saveToken = (access_token, refresh_token) => {
@@ -15,12 +15,12 @@ export const saveToken = (access_token, refresh_token) => {
     Cookies.remove(accessTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: import.meta.env.COOKIE_DOMAIN,
+      domain: "https://master.dct2mhtymjoyx.amplifyapp.com",
     });
     Cookies.remove(refreshTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: import.meta.env.COOKIE_DOMAIN,
+      domain: "https://master.dct2mhtymjoyx.amplifyapp.com",
     });
   }
 };
@@ -37,12 +37,12 @@ export const logOut = () => {
     Cookies.remove(accessTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: import.meta.env.COOKIE_DOMAIN,
+      domain: "https://master.dct2mhtymjoyx.amplifyapp.com",
     });
     Cookies.remove(refreshTokenKey, {
       ...objectCookies,
       path: "/",
-      domain: import.meta.env.COOKIE_DOMAIN,
+      domain: "https://master.dct2mhtymjoyx.amplifyapp.com",
     });
   }
 };

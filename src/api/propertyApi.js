@@ -16,7 +16,7 @@ export const propertyAPI = {
   getPropertiesSearch: (query = "") =>
     `${apiURL}api/v1/properties?sort=id,desc&page=0&size=10&propertyPostingStatus=${query}`,
   propertyImage: (path) =>
-    `${import.meta.env.VITE_AWS_S3_BUCKET_DOMAIN}/${path}`,
+    `https://huy-property-images.s3.ap-southeast-1.amazonaws.com/${path}`,
   addPropertyPhoto: (propertyId) =>
     `${apiURL}api/v1/photos/upload/${propertyId}`,
   defaultImage:
