@@ -6,6 +6,10 @@ import useQuery from "../../hooks/useQuery";
 import PropertyList from "../Property/list/PropertyList";
 import UserInfoInput from "./UserInfoInput";
 import UserCard from "./parts/UserCard";
+import Hamster from "../../components/loading/hamster/Hamster";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { authLogOut } from "../../store/auth/auth-slice";
 
 const UserProfile = ({ item }) => {
   const axiosPrivate = useAxiosPrivate();
@@ -17,24 +21,27 @@ const UserProfile = ({ item }) => {
   const [setSearchParams] = useSearchParams();
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showEditAvatar, setShowEditAvatar] = useState(false);
-
+  const dispatch = useDispatch();
   const query = useQuery();
   let page = query.get("page") || 0;
   async function fecthUserProfile() {
-    const res = await axiosPrivate.get(`api/v1/user/info`);
-    // console.log(res);
-    setUserProfile(res.data);
-    setLoading(false);
+    try {
+      const res = await axiosPrivate.get(`api/v1/user/info`);
+      console.log(res);
+      setUserProfile(res.data);
+      setLoading(false);
+    } catch (error) {
+      dispatch(authLogOut());
+      toast.error(
+        `Error ${error.response.status}. Your account might be logged in somewhere else or your session has expired. Please log in again.`
+      );
+    }
   }
 
   useEffect(() => {
-    try {
-      setTimeout(() => {
-        fecthUserProfile();
-      }, 200);
-    } catch (e) {
-      console.log(e);
-    }
+    setTimeout(() => {
+      fecthUserProfile();
+    }, 200);
   }, []);
 
   useEffect(() => {
@@ -61,10 +68,11 @@ const UserProfile = ({ item }) => {
 
   if (!userProfile) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex items-center justify-center h-screen">
         <div className="block text-white">
+          <Hamster></Hamster>
           <button
-            className="bg-error text-white rounded-lg px-6 py-4"
+            className="px-6 py-4 text-white rounded-lg bg-error"
             onClick={handleReloadClick}
           >
             Reload User Profile
@@ -91,9 +99,9 @@ const UserProfile = ({ item }) => {
 
   return (
     <div className="w-full lg:max-w-[1440px] px-4 mx-auto">
-      <div className="relative flex flex-col min-w-0 break-words bg-inherit w-full mb-6 shadow-xl rounded-lg mt-16">
+      <div className="relative flex flex-col w-full min-w-0 mt-16 mb-6 break-words rounded-lg shadow-xl bg-inherit">
         <div className="px-6">
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <UserCard item={userProfile}></UserCard>
           </div>
         </div>
@@ -114,7 +122,7 @@ const UserProfile = ({ item }) => {
 
         {showEditAvatar && (
           <>
-            <div className="my-6 border-b border-blueGray-200 text-center"></div>
+            <div className="my-6 text-center border-b border-blueGray-200"></div>
             <AvatarImageUpload></AvatarImageUpload>
             <button
               className="bg-error max-w-[400px] mx-auto w-full rounded-lg px-4 py-2 text-white mt-4 hover:bg-emerald-400"
@@ -129,10 +137,10 @@ const UserProfile = ({ item }) => {
             <UserInfoInput></UserInfoInput>
           </>
         )}
-        <div className="mt-6 border-b border-blueGray-200 text-center"></div>
+        <div className="mt-6 text-center border-b border-blueGray-200"></div>
 
         <div className="flex flex-col items-center justify-center">
-          <h1 className="dark:text-white text-primary text-3xl font-bold tracking-widest font-mono mt-5 underline">
+          <h1 className="mt-5 font-mono text-3xl font-bold tracking-widest underline dark:text-white text-primary">
             Your listing(s)
           </h1>
           <PropertyList
