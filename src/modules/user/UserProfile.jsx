@@ -31,10 +31,12 @@ const UserProfile = ({ item }) => {
       setUserProfile(res.data);
       setLoading(false);
     } catch (error) {
-      dispatch(authLogOut());
-      toast.error(
-        `Error ${error.response.status}. Your account might be logged in somewhere else or your session has expired. Please log in again.`
-      );
+      if (error.response.status === 401) {
+        dispatch(authLogOut());
+        toast.error(
+          `Error ${error.response.status}. Your account might be logged in somewhere else or your session has expired. Please log in again.`
+        );
+      }
     }
   }
 
