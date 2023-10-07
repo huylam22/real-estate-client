@@ -15,7 +15,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import { authRefreshToken, authUpdateUser } from "./store/auth/auth-slice";
 import { getToken } from "./utils/auth";
 import NotFoundErrorPage from "./pages/NotFoundErrorPage";
-import PropertyEditPage from "./pages/EditPropertyPage";
+import PropertyEditPage from "./pages/PropertyEditPage";
 Modal.setAppElement("#root");
 
 function App() {

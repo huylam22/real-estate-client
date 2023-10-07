@@ -14,9 +14,30 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
 import { Dropdown } from "../../components/dropdown";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-const legalStatus = ["Owner", "Agent", "Co-Owned"];
-const landDirection = ["North", "South", "East", "West"];
+const legalStatus = [
+  "HĐ Mua bán",
+  "Sổ hồng",
+  "Sổ đỏ",
+  "Giấy chứng nhận quyền sử dụng đất",
+  "Giấy phép xây dựng",
+  "Giấy phép kinh doanh",
+  "Giấy tờ khác",
+];
+
+const landDirection = [
+  "North",
+  "Northeast",
+  "East",
+  "Southeast",
+  "South",
+  "Southwest",
+  "West",
+  "Northwest",
+];
+
 const landType = [
   "Apartment",
   "House",
@@ -30,11 +51,60 @@ const landType = [
   "Resort",
   "Other",
 ];
+
+const schema = yup.object({
+  propertyPostingStatus: yup.string().required("Posting Title is required"),
+  propertyPrice: yup
+    .number()
+    .typeError("Price must be a valid number")
+    .required("Price is required"),
+  propertyAddressNumber: yup.string().required("Address Number is required"),
+  propertyAddressStreet: yup.string().required("Address Street is required"),
+  propertyBedrooms: yup
+    .number()
+    .integer("Bedrooms must be an integer")
+    .typeError("Bedrooms must be a valid number")
+    .required("Bedrooms is required"),
+  propertyBathrooms: yup
+    .number()
+    .integer("Bathroom(s) must be an integer")
+    .typeError("Bathroom(s) must be a valid number")
+    .required("Bathroom(s) is required"),
+  propertyLength: yup
+    .number()
+    .typeError("Length must be a valid number")
+    .required("Length is required"),
+  propertyWidth: yup
+    .number()
+    .typeError("Width must be a valid number")
+    .required("Width is required"),
+  propertyArea: yup
+    .number()
+    .typeError("Area must be a valid number")
+    .required("Area is required"),
+  propertyDescription: yup.string().required("Description is required"),
+  propertyLandLegalStatus: yup.string().required("Legal Status is required"),
+  propertyLandDirection: yup.string().required("Land Direction is required"),
+  propertyLandType: yup.string().required("Land Type is required"),
+  province: yup.string().required("Province is required"),
+  district: yup.string().required("District is required"),
+});
+
 const PropertyAddNew = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
-  const { handleSubmit, control, setValue, reset, watch } = useForm();
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    resolver: yupResolver(schema),
+  });
   const getDropdownLabel = (name, defaultValue = "") => {
     const value = watch(name) || defaultValue;
     return value;
@@ -51,12 +121,12 @@ const PropertyAddNew = () => {
   const [districtId, setDistrictId] = useState(0);
   const [placeholderOption, setPlaceholderOption] = useState("Select");
 
-  const handleAddNewCampaign = async (values) => {
+  const handleAddNewProperty = async (values) => {
     delete values["province"];
     delete values["district"];
     try {
       const response = await axiosPrivate.post(
-        `api/v1/properties/create/${provinceId}/${districtId}/${auth.user.id}`,
+        `api/v1/property/create/${provinceId}/${districtId}/${auth.user.id}`,
         values
       );
       // console.log(response);
@@ -111,13 +181,14 @@ const PropertyAddNew = () => {
           List Your Property 🏠🏡
         </h1>
       </div>
-      <form onSubmit={handleSubmit(handleAddNewCampaign)}>
+      <form onSubmit={handleSubmit(handleAddNewProperty)}>
         <FormRow>
           <FormGroup>
             <Label htmlFor="propertyPostingStatus">
               Property Posting Title *
             </Label>
             <Input
+              error={errors.propertyPostingStatus?.message}
               control={control}
               name="propertyPostingStatus"
               placeholder="Write a title for your property"
@@ -126,6 +197,7 @@ const PropertyAddNew = () => {
           <FormGroup>
             <Label htmlFor="propertyPrice">Price *</Label>
             <Input
+              error={errors.propertyPrice?.message}
               control={control}
               name="propertyPrice"
               placeholder="VND 0.00 tỷ"
@@ -136,6 +208,7 @@ const PropertyAddNew = () => {
           <FormGroup>
             <Label htmlFor="propertyAddressNumber">Address Number *</Label>
             <Input
+              error={errors.propertyAddressNumber?.message}
               control={control}
               name="propertyAddressNumber"
               placeholder="Address Number: 1, 2, 3"
@@ -144,6 +217,7 @@ const PropertyAddNew = () => {
           <FormGroup>
             <Label htmlFor="propertyAddressStreet">Street *</Label>
             <Input
+              error={errors.propertyAddressStreet?.message}
               control={control}
               name="propertyAddressStreet"
               placeholder="Street: Nguyen Van Linh"
@@ -154,6 +228,7 @@ const PropertyAddNew = () => {
           <FormGroup>
             <Label htmlFor="propertyBedrooms">Bedroom(s) *</Label>
             <Input
+              error={errors.propertyBedrooms?.message}
               control={control}
               name="propertyBedrooms"
               placeholder="Bedroom Amount: 1, 2, 3"
@@ -162,6 +237,7 @@ const PropertyAddNew = () => {
           <FormGroup>
             <Label htmlFor="propertyBathrooms">Bathroom(s) *</Label>
             <Input
+              error={errors.propertyBathrooms?.message}
               control={control}
               name="propertyBathrooms"
               placeholder="Bathroom Amount: 1, 2, 3"
@@ -172,6 +248,7 @@ const PropertyAddNew = () => {
           <FormGroup>
             <Label htmlFor="propertyLength">Length (m) *</Label>
             <Input
+              error={errors.propertyLength?.message}
               control={control}
               name="propertyLength"
               placeholder="Length in meter: 100.00"
@@ -180,6 +257,7 @@ const PropertyAddNew = () => {
           <FormGroup>
             <Label htmlFor="propertyWidth">Width (m) *</Label>
             <Input
+              error={errors.propertyWidth?.message}
               control={control}
               name="propertyWidth"
               placeholder="Length in meter: 100.00"
@@ -190,6 +268,7 @@ const PropertyAddNew = () => {
               Area (m<sup>2</sup>) *
             </Label>
             <Input
+              error={errors.propertyArea?.message}
               control={control}
               name="propertyArea"
               placeholder="Area in meter square: 100.00"
@@ -199,6 +278,7 @@ const PropertyAddNew = () => {
         <FormGroup>
           <Label htmlFor="propertyDescription">Short Description *</Label>
           <TextArea
+            error={errors.propertyDescription?.message}
             name="propertyDescription"
             placeholder="Write a short description for your listing"
             control={control}
@@ -235,6 +315,9 @@ const PropertyAddNew = () => {
                   ))}
               </Dropdown.List>
             </Dropdown>
+            <span className="text-sm text-error">
+              {errors.propertyLandLegalStatus?.message}
+            </span>
           </FormGroup>
           <FormGroup>
             <Label htmlFor="propertyLandLegalStatus">Land Direction *</Label>
@@ -262,6 +345,9 @@ const PropertyAddNew = () => {
                   ))}
               </Dropdown.List>
             </Dropdown>
+            <span className="text-sm text-error">
+              {errors.propertyLandDirection?.message}
+            </span>
           </FormGroup>
         </FormRow>
         <FormRow>
@@ -289,9 +375,12 @@ const PropertyAddNew = () => {
                   ))}
               </Dropdown.List>
             </Dropdown>
+            <span className="text-sm text-error">
+              {errors.propertyLandType?.message}
+            </span>
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="propertyFloorUnits">Property Floor Units *</Label>
+            <Label htmlFor="propertyFloorUnits">Property Floor Units </Label>
             <Input
               control={control}
               name="propertyFloorUnits"
@@ -333,6 +422,9 @@ const PropertyAddNew = () => {
                   ))}
               </Dropdown.List>
             </Dropdown>
+            <span className="text-sm text-error">
+              {errors.province?.message}
+            </span>
           </FormGroup>
           <FormGroup>
             <Label htmlFor="district">District *</Label>
@@ -361,6 +453,9 @@ const PropertyAddNew = () => {
                   ))}
               </Dropdown.List>
             </Dropdown>
+            <span className="text-sm text-error">
+              {errors.district?.message}
+            </span>
           </FormGroup>
         </FormRow>
 

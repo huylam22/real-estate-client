@@ -27,7 +27,7 @@ const Input = (props) => {
         id={name}
         type={type}
         placeholder={error.length <= 0 ? placeholder : ""}
-        className={`w-full px-6 py-4 font-medium border rounded-xl bg-transparent border-darkStroke dark:border-graySoft placeholder:text-text2 dark:placeholder:text-text3 dark:text-white placeholder:font-normal
+        className={`w-full disabled:bg-slate-700 px-6 py-4 font-medium border rounded-xl bg-transparent border-darkStroke dark:border-graySoft placeholder:text-text2 dark:placeholder:text-text3 dark:text-white placeholder:font-normal
           ${
             error.length > 0
               ? "border-error text-error"

@@ -31,7 +31,7 @@ const PropertyViewPage = () => {
     async function getPropertyDetail() {
       try {
         const res = await axios.get(propertyAPI.getPropertyDetail(propertyId));
-        console.log(res);
+        // console.log(res);
         setData(res.data);
         setLoading(false);
 

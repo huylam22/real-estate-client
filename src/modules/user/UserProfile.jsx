@@ -18,7 +18,7 @@ const UserProfile = ({ item }) => {
   const [pageCount, setPageCount] = useState(0);
   const [userProperties, setUserProperties] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showEditAvatar, setShowEditAvatar] = useState(false);
   const dispatch = useDispatch();
