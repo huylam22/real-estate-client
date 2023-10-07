@@ -27,7 +27,7 @@ const UserProfile = ({ item }) => {
   async function fecthUserProfile() {
     try {
       const res = await axiosPrivate.get(`api/v1/user/info`);
-      console.log(res);
+      // console.log(res);
       setUserProfile(res.data);
       setLoading(false);
     } catch (error) {
@@ -43,7 +43,7 @@ const UserProfile = ({ item }) => {
   useEffect(() => {
     setTimeout(() => {
       fecthUserProfile();
-    }, 200);
+    }, 400);
   }, []);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const UserProfile = ({ item }) => {
         const res = await axiosPrivate.get(
           `api/v1/properties/user/${userProfile?.id}?page=${page}`
         );
-        console.log(res);
+        // console.log(res);
         setUserProperties(res.data);
         setPageCount(res.data.totalPages);
       }
@@ -100,7 +100,7 @@ const UserProfile = ({ item }) => {
   };
 
   return (
-    <div className="w-full lg:max-w-[1440px] px-4 mx-auto">
+    <div className="w-full lg:max-w-[1440px] mx-auto">
       <div className="relative flex flex-col w-full min-w-0 mt-16 mb-6 break-words rounded-lg shadow-xl bg-inherit">
         <div className="px-6">
           <div className="mt-12 text-center">

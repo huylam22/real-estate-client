@@ -33,13 +33,18 @@ const PropertyCard = ({ item, edit = false }) => {
     window.scrollTo(0, 0);
   };
 
+  const handleClickNavigateImage = () => {
+    navigate(`/add-property/images/${id}`);
+    window.scrollTo(0, 0);
+  };
+
   const handleClickNavigateEdit = () => {
     navigate(`/properties/edit/${id}`);
     window.scrollTo(0, 0);
   };
   return (
     <>
-      <div className="flex flex-col h-full p-3 transition-all bg-white dark:bg-softDark shadow-md cursor-pointer select-none lg:rounded-lg text-secondary hover:shadow-neutral-400">
+      <div className="grid h-full grid-cols-1 p-3 transition-all bg-white shadow-md cursor-pointer select-none w0 dark:bg-softDark lg:rounded-lg text-secondary hover:shadow-neutral-400">
         <div onClick={handleClickNavigate}>
           <img
             src={
@@ -48,7 +53,7 @@ const PropertyCard = ({ item, edit = false }) => {
                 : propertyAPI.defaultImage
             }
             alt=""
-            className="w-full h-[250px] object-cover rounded-lg shadow-sm hover:shadow-neutral-300  transition-all  mb-5"
+            className="object-cover min-h-[200px] max-h-[350px] w-full mb-5 transition-all rounded-lg shadow-sm hover:shadow-neutral-300"
           ></img>
 
           <div className="flex flex-col flex-1">
@@ -58,12 +63,12 @@ const PropertyCard = ({ item, edit = false }) => {
                 {propertyPrice} tỷ
               </span>
             </div>
-            <div className="flex flex-col justify-between text-start gap-4">
+            <div className="flex flex-col justify-between gap-4 text-start">
               <span className="text-[#ADB8CC] dark:text-text4  font-medium text-sm">
                 {propertyAddressNumber} {propertyAddressStreet}, {districtName},{" "}
                 {provinceName}
               </span>
-              <div className="flex items-center dark:text-text4 font-light gap-x-3">
+              <div className="flex items-center font-light dark:text-text4 gap-x-3">
                 <FontAwesomeIcon icon={faBed} />
                 <span> {propertyBedrooms}</span>
                 <FontAwesomeIcon icon={faBathtub} />
@@ -83,17 +88,20 @@ const PropertyCard = ({ item, edit = false }) => {
           </div>
         </div>
         {edit && (
-          <div className="flex gap-4">
+          <div className="flex flex-col lg:gap-4 lg:flex-row">
             <button
               onClick={handleClickNavigateEdit}
-              className="mt-3 bg-purple w-full rounded-lg px-4 py-2 z-50 hover:bg-violet-400 text-white"
+              className="z-50 w-full px-4 py-2 mt-3 text-white rounded-lg bg-purple hover:bg-violet-400"
             >
               Edit
             </button>
-            <button className="mt-3 bg-green w-full rounded-lg px-4 py-2 z-50 hover:bg-violet-400 text-white">
+            <button
+              className="z-50 w-full px-4 py-2 mt-3 text-white rounded-lg bg-green hover:bg-violet-400"
+              onClick={handleClickNavigateImage}
+            >
               Images
             </button>
-            <button className="mt-3 bg-error w-full rounded-lg px-4 py-2 z-50 hover:bg-violet-400 text-white">
+            <button className="z-50 w-full px-4 py-2 mt-3 text-white rounded-lg bg-error hover:bg-violet-400">
               Delete
             </button>
           </div>

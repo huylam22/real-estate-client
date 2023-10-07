@@ -93,22 +93,22 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
       </label>
       {selectedImages.length > 0 && (
         <div className="mt-4">
-          <h2 className="text-lg font-semibold mb-2 text-white">
+          <h2 className="mb-2 text-lg font-semibold text-white">
             Selected Images:
           </h2>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col items-center justify-center gap-2 lg:flex-row lg:items-start lg:justify-start lg:flex-wrap">
             {selectedImages.map((file, index) => (
               <div key={index} className="relative">
                 <button
                   onClick={() => removeImage(index)}
-                  className="absolute w-8 h-8 top-2 right-2 bg-red-500 p-1 rounded-full text-white"
+                  className="absolute w-8 h-8 p-1 text-white bg-red-500 rounded-full top-2 right-2"
                 >
                   <IconX></IconX>
                 </button>
                 <img
                   src={URL.createObjectURL(file)}
                   alt={`Preview ${index}`}
-                  className="w-60 h-60 object-cover rounded-lg"
+                  className="object-cover rounded-lg w-60 h-60"
                 />
               </div>
             ))}
@@ -117,7 +117,7 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
             <div className="mt-2">
               <div className="w-full bg-gray-200 rounded-full">
                 <div
-                  className="bg-blue-500 text-xs leading-none py-1 text-center text-white rounded-full"
+                  className="py-1 text-xs leading-none text-center text-white bg-blue-500 rounded-full"
                   style={{ width: `${uploadProgress}%` }}
                 >
                   {uploadProgress}%
@@ -129,7 +129,7 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
       )}
       <button
         onClick={handleConfirmUpload}
-        className="mt-2 px-4 py-2 w-full bg-green text-white rounded hover:bg-emerald-400"
+        className="w-full px-4 py-2 mt-2 text-white rounded bg-green hover:bg-emerald-400"
       >
         Confirm Upload
       </button>

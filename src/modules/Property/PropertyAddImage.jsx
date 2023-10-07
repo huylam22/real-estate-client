@@ -7,8 +7,8 @@ const PropertyAddImage = () => {
   // console.log(propertyId);
 
   return (
-    <div className="p-10">
-      <h1 className="text-white text-2xl p-3">
+    <div className="pt-28 lg:p-10">
+      <h1 className="p-3 text-2xl text-white">
         Upload and Display Image For Your Property
       </h1>
       <ImageUpload propertyId={propertyId} />

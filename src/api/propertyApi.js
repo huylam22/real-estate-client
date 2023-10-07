@@ -3,7 +3,7 @@
 
 export const propertyAPI = {
   getPropertyDetail: (propertyId, type) =>
-    `${import.meta.env.VITE_API_URL}api/v1/properties/${propertyId}${
+    `${import.meta.env.VITE_API_URL}/api/v1/properties/${propertyId}${
       type ? `/${type}` : ""
     }`,
   getProperties: (

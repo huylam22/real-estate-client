@@ -64,7 +64,7 @@ const PropertyEdit = () => {
       // console.log(response);
       toast.success("Edit property successfully");
       if (response.status === 201) {
-        navigate(`/add-property/${response.data.id}`);
+        navigate(`/add-property/images/${response.data.id}`);
       }
       reset({});
     } catch (error) {

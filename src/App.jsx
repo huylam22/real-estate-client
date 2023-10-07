@@ -58,7 +58,7 @@ function App() {
           element={<StartPropertyPage></StartPropertyPage>}
         ></Route>
         <Route
-          path="/add-property/:propertyId"
+          path="/add-property/images/:propertyId"
           element={<PropertyAddImagePage></PropertyAddImagePage>}
         ></Route>
         <Route

@@ -31,7 +31,7 @@ const PropertyViewPage = () => {
     async function getPropertyDetail() {
       try {
         const res = await axios.get(propertyAPI.getPropertyDetail(propertyId));
-        // console.log(res);
+        console.log(res);
         setData(res.data);
         setLoading(false);
 
@@ -71,7 +71,7 @@ const PropertyViewPage = () => {
               <SwiperSlide key={idx}>
                 <div className="w-full h-[300px] max-w-[800px] mx-auto">
                   <img
-                    className="object-cover w-full h-full cursor-pointer shadow-lg rounded-lg"
+                    className="object-cover w-full h-full rounded-lg shadow-lg cursor-pointer"
                     src={propertyAPI.propertyImage(item)}
                     onClick={(e) => {
                       setOpenModal(true);
@@ -89,7 +89,7 @@ const PropertyViewPage = () => {
           <PropertyInfo data={data}></PropertyInfo>
           <div className="">
             <div
-              className="lg:sticky mx-auto top-24 bottom-0"
+              className="bottom-0 mx-auto lg:sticky top-24"
               style={{ alignSelf: "flex-start", position: "-webkit-sticky" }}
             >
               <UserCard item={user}></UserCard>
@@ -98,10 +98,10 @@ const PropertyViewPage = () => {
         </div>
       </section>
 
-      <div className="bg-slate-200 dark:bg-slate-800 bg-opacity-80 py-2">
+      <div className="py-2 bg-slate-200 dark:bg-slate-800 bg-opacity-80">
         <section className="">
           <h3
-            className="mx-10 mt-10 text-secondary dark:text-white font-semibold text-2xl hover:text-green hover:underline cursor-pointer"
+            className="mx-10 mt-10 text-2xl font-semibold cursor-pointer text-secondary dark:text-white hover:text-green hover:underline"
             onClick={handleNavigatet}
           >
             Similar Properties
@@ -133,7 +133,7 @@ const PropertyViewPage = () => {
       </div>
       <ModalImage isOpen={openModal} onClose={onClose}>
         <img
-          className="w-full h-full object-fill rounded-lg"
+          className="object-fill w-full h-full rounded-lg"
           src={propertyAPI.propertyImage(propertyCoverPaths[clickedIndex])}
         />
       </ModalImage>

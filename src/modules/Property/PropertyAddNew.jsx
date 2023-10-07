@@ -62,7 +62,7 @@ const PropertyAddNew = () => {
       // console.log(response);
       toast.success("Add new property successfully");
       if (response.status === 201) {
-        navigate(`/add-property/${response.data.id}`);
+        navigate(`/add-property/images/${response.data.id}`);
       }
       reset({});
     } catch (error) {
