@@ -120,6 +120,9 @@ const PropertyAddNew = () => {
   const [propertyLandType, setPropertyLandType] = useState("");
   const [districtId, setDistrictId] = useState(0);
   const [placeholderOption, setPlaceholderOption] = useState("Select");
+  const [disableClick, setDisableClick] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleAddNewProperty = async (values) => {
     delete values["province"];
@@ -138,6 +141,10 @@ const PropertyAddNew = () => {
     } catch (error) {
       toast.error("error");
     }
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
   };
 
   const handleSelectDropdownOption = (name, value) => {
@@ -161,18 +168,36 @@ const PropertyAddNew = () => {
       try {
         if (auth.accessToken === "") return;
         const response = await instance.get("api/v1/provinces");
+
         setProvinces(response.data);
+
         if (provinceId === 0) return;
+
         const districts = await instance.get(
           `api/v1/districts/details/province/${provinceId}`
         );
         setDistricts(districts.data);
+        setDisableClick("");
+        setLoading(false);
+        if (districts.data) {
+        }
       } catch (error) {
         toast.error(error.message);
       }
     }
     fetchRegions();
   }, [provinceId]);
+
+  useEffect(() => {
+    setValue("district", "");
+    setDisableClick("pointer-events-none ");
+    if (provinceId === 0) return;
+    setLoading(true);
+  }, [provinceId]);
+
+  const filteredProvinces = provinces.filter((item) =>
+    item?.provinceName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="bg-white dark:bg-inherit rounded-xl py-10 px-[66px]">
@@ -404,9 +429,14 @@ const PropertyAddNew = () => {
                   "Select Province"
                 )}
               ></Dropdown.Select>
+
               <Dropdown.List>
-                {provinces.length > 0 &&
-                  provinces.map((item) => (
+                <Dropdown.Search
+                  placeholder="Search province"
+                  onChange={handleSearchChange}
+                ></Dropdown.Search>
+                {filteredProvinces.length > 0 &&
+                  filteredProvinces.map((item) => (
                     <Dropdown.Option
                       key={item?.id}
                       onClick={() =>
@@ -428,11 +458,11 @@ const PropertyAddNew = () => {
           </FormGroup>
           <FormGroup>
             <Label htmlFor="district">District *</Label>
-            <Dropdown>
+            <Dropdown className={`${disableClick}`}>
               <Dropdown.Select
                 placeholder={getDropdownLabelRegions(
                   "district",
-                  "Select District"
+                  `${loading ? "Loading" : "Select District"}`
                 )}
               ></Dropdown.Select>
               <Dropdown.List>

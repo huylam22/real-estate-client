@@ -1,14 +1,14 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import LayoutHome from "../layouts/LayoutHome";
 import PropertyAddImage from "../modules/Property/PropertyAddImage";
+import RequiredAuthPage from "./RequiredAuthPage";
 
 const PropertyAddImagePage = () => {
-  const params = useParams();
-  // console.log(params);
   return (
     <LayoutHome>
-      <PropertyAddImage></PropertyAddImage>
+      <RequiredAuthPage>
+        <PropertyAddImage></PropertyAddImage>
+      </RequiredAuthPage>
     </LayoutHome>
   );
 };

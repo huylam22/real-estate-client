@@ -49,7 +49,7 @@ function* handleAuthLogin(action) {
     toast.success("Login successfully!");
   } catch (error) {
     console.log(error);
-    toast.error(error.response.data.errorMessage);
+    toast.error(error.errorMessage);
   }
   yield 1;
 }

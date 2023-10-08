@@ -33,6 +33,7 @@ const UserInfoInput = () => {
           <FormGroup>
             <Label htmlFor="firstname">First Name*</Label>
             <Input
+              disabled
               register={"firstname"}
               control={control}
               name="firstname"
@@ -42,6 +43,7 @@ const UserInfoInput = () => {
           <FormGroup>
             <Label htmlFor="lastname">Last Name *</Label>
             <Input
+              disabled
               register={"lastname"}
               control={control}
               name="lastname"
@@ -51,6 +53,7 @@ const UserInfoInput = () => {
         </FormRow>
         <div className="mt-10 text-center">
           <Button
+            disabled
             type="submit"
             kind="primary"
             className="lg:w-[200px] w-full mx-auto"

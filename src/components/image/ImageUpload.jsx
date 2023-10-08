@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { propertyAPI } from "../../api/propertyApi";
@@ -10,6 +10,7 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
   const { access_token } = getToken();
   const [selectedImages, setSelectedImages] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
   const handleUploadImage = (e) => {
     const files = e.target.files;
@@ -28,8 +29,27 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
     updatedImages.splice(index, 1);
     setSelectedImages(updatedImages);
   };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    handleFiles(files);
+  };
+
+  const handleFiles = (files) => {
+    const imagesArray = Array.from(files);
+    setSelectedImages(imagesArray);
+    onChange(imagesArray);
+  };
+  const handleFileInputClick = () => {
+    fileInputRef.current?.focus(); // Using optional chaining to access click method
+  };
 
   const handleConfirmUpload = async () => {
+    if (selectedImages.length <= 0) {
+      toast.error("Please add image(s) to upload.");
+      return;
+    }
+    // console.log(selectedImages);
     const bodyFormData = new FormData();
     selectedImages.forEach((file) => {
       bodyFormData.append("file", file); // Append each file with key "file"
@@ -68,29 +88,37 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
   };
   return (
     <div>
-      <label className="w-full h-[200px] border border-gray-200 border-dashed rounded-xl cursor-pointer flex items-center justify-center">
-        <input
-          type="file"
-          onChange={handleUploadImage}
-          className="hidden"
-          multiple
-          accept="image/*"
-        />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-10 h-10 text-white"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+      <div
+        onDrop={handleDrop}
+        onDragOver={(e) => e.preventDefault()}
+        onClick={handleFileInputClick}
+      >
+        <label className="w-full h-[200px] border border-gray-200 border-dashed rounded-xl cursor-pointer flex items-center justify-center">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleUploadImage}
+            className="hidden"
+            multiple
+            accept="image/*"
           />
-        </svg>
-      </label>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-10 h-10 text-white"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+            />
+          </svg>
+        </label>
+      </div>
+
       {selectedImages.length > 0 && (
         <div className="mt-4">
           <h2 className="mb-2 text-lg font-semibold text-white">

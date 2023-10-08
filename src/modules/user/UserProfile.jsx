@@ -51,7 +51,7 @@ const UserProfile = ({ item }) => {
       if (loading) return;
       async function fetchUserProperties() {
         const res = await axiosPrivate.get(
-          `api/v1/properties/user/${userProfile?.id}?page=${page}`
+          `api/v1/properties/user/${userProfile?.id}?page=${page}&sort=id,desc`
         );
         // console.log(res);
         setUserProperties(res.data);
@@ -99,6 +99,11 @@ const UserProfile = ({ item }) => {
     setShowEditAvatar((prev) => !prev);
   };
 
+  async function deleteProperty(id) {
+    const res = await axiosPrivate.delete(`api/v1/delete/${id}`);
+    // console.log(res);
+    fecthUserProfile();
+  }
   return (
     <div className="w-full lg:max-w-[1440px] mx-auto">
       <div className="relative flex flex-col w-full min-w-0 mt-16 mb-6 break-words rounded-lg shadow-xl bg-inherit">
@@ -146,6 +151,7 @@ const UserProfile = ({ item }) => {
             Your listing(s)
           </h1>
           <PropertyList
+            deleteProperty={deleteProperty}
             edit={true}
             item={userProperties}
             className="pt-0"

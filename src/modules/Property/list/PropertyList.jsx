@@ -12,6 +12,7 @@ const PropertyList = ({
   item,
   pageCount,
   className = "",
+  deleteProperty = (id) => {},
 }) => {
   return (
     <>
@@ -19,15 +20,15 @@ const PropertyList = ({
         className={`lg:min-h-screen lg:mt-0 ${className} max-w-[1440px] mx-auto`}
       >
         {isLoading && (
-          <div className="flex mt-20 flex-col gap-2 md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 lg:gap-x-4 lg:gap-y-6">
+          <div className="flex flex-col gap-2 mt-20 md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 lg:gap-x-4 lg:gap-y-6">
             {[...Array(8)].map((_, index) => (
               <PropertyCardLoading key={index} />
             ))}
           </div>
         )}
-        <div className="lg:p-5 p-0">
+        <div className="p-0 lg:p-5">
           {item && (
-            <h1 className="text-secondary dark:text-graySoft mb-4">
+            <h1 className="mb-4 text-secondary dark:text-graySoft">
               Showing <strong>{item?.numberOfElements} </strong> of all{" "}
               <strong>{item?.totalElements}</strong> results
             </h1>
@@ -42,6 +43,7 @@ const PropertyList = ({
                   whileTap={{ scale: 0.97 }}
                 >
                   <PropertyCard
+                    deleteProperty={deleteProperty}
                     edit={edit}
                     key={item.id}
                     item={item}
