@@ -82,14 +82,14 @@ const PropertyInfo = ({ loading = false, data }) => {
           <div className="flex flex-col justify-between gap-2 mt-2 lg:gap-5 lg:flex-row">
             <span className="text-xl text-secondary dark:text-white opacity-70">
               Created at:{" "}
-              <span className="opacity-100 text-whiteSoft dark:text-graySoft">
+              <span className="opacity-100 text-secondary dark:text-graySoft">
                 {createdDate}
               </span>
             </span>
             {updatedDate && (
-              <span className="text-xl text-whiteSoft dark:text-green opacity-70">
+              <span className="text-xl text-green dark:text-green opacity-70">
                 Updated at:{" "}
-                <span className="opacity-100 text-whiteSoft dark:text-graySoft">
+                <span className="opacity-100 text-secondary dark:text-graySoft">
                   {updatedDate}
                 </span>
               </span>

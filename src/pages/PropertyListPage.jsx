@@ -48,11 +48,11 @@ const PropertyListPage = () => {
 
   return (
     <LayoutHome>
-      <div className="fixed flex items-center justify-start w-full border top-[82px] h-14 border-b-black dark:border-white dark:text-white border-t-black">
+      {/* <div className="fixed flex items-center justify-start w-full border top-[82px] h-14 border-b-black dark:border-white dark:text-white border-t-black">
         <div>DropDownFilter</div>
-      </div>
+      </div> */}
       <PropertyList
-        className="lg:pt-16 pt-24"
+        className="pt-24 lg:pt-16"
         isLoading={isLoading}
         item={properties}
         handlePageClick={handlePageClick}
