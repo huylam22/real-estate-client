@@ -8,8 +8,8 @@ const PropertyAddImage = () => {
 
   return (
     <div className="pt-28 lg:p-10">
-      <h1 className="p-3 text-2xl text-white">
-        Upload and Display Image For Your Property
+      <h1 className="p-3 text-2xl text-primary dark:text-white">
+        (Upload or Drag & Drop Images) to Display Image For Your Property
       </h1>
       <ImageUpload propertyId={propertyId} />
     </div>

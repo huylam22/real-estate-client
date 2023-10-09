@@ -54,7 +54,7 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
     selectedImages.forEach((file) => {
       bodyFormData.append("file", file); // Append each file with key "file"
     });
-
+    console.log(bodyFormData);
     try {
       const response = await axios.post(
         propertyAPI.addPropertyPhoto(propertyId),
@@ -93,7 +93,7 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
         onDragOver={(e) => e.preventDefault()}
         onClick={handleFileInputClick}
       >
-        <label className="w-full h-[200px] border border-gray-200 border-dashed rounded-xl cursor-pointer flex items-center justify-center">
+        <label className="w-full h-[200px] border border-secondary dark:border-gray-200 border-dashed rounded-xl cursor-pointer flex items-center justify-center">
           <input
             type="file"
             ref={fileInputRef}
@@ -108,7 +108,7 @@ const ImageUpload = ({ onChange = () => {}, propertyId }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-10 h-10 text-white"
+            className="w-10 h-10 text-secondary dark:text-white"
           >
             <path
               strokeLinecap="round"

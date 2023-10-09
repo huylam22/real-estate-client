@@ -200,9 +200,9 @@ const PropertyAddNew = () => {
   );
 
   return (
-    <div className="bg-white dark:bg-inherit rounded-xl py-10 px-[66px]">
+    <div className="bg-white dark:bg-inherit rounded-xl py-10 px-[66px] m-10">
       <div className="text-center">
-        <h1 className="py-4 font-bold  px-14 text-text2 bg-text4 dark:bg-softDark dark:text-white bg-opacity-5 rounded-xl text-[25px] inline-block mb-10">
+        <h1 className="py-4 font-bold border border-secondary dark:border-white  px-14 text-text2 bg-text4 dark:bg-softDark dark:text-white bg-opacity-5 rounded-xl text-[25px] inline-block mb-10">
           List Your Property 🏠🏡
         </h1>
       </div>

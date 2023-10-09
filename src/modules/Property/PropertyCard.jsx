@@ -48,7 +48,7 @@ const PropertyCard = ({ item, edit = false, deleteProperty = (id) => {} }) => {
   };
   return (
     <>
-      <div className="grid h-full grid-cols-1 p-3 transition-all bg-white shadow-md cursor-pointer select-none w0 dark:bg-softDark lg:rounded-lg text-secondary hover:shadow-neutral-400">
+      <div className="grid h-full grid-cols-1 p-3 transition-all lg:min-h-[458px] bg-white shadow-md cursor-pointer select-none w0 dark:bg-softDark lg:rounded-lg text-secondary hover:shadow-neutral-400">
         <div onClick={handleClickNavigate}>
           <img
             src={

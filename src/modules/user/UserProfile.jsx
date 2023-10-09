@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import AvatarImageUpload from "../../components/image/AvartaImageUpload";
+import AvatarImageUpload from "../../components/image/AvatarImageUpload";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useQuery from "../../hooks/useQuery";
 import PropertyList from "../Property/list/PropertyList";
@@ -68,6 +68,13 @@ const UserProfile = ({ item }) => {
     fecthUserProfile(); // Call the function to fetch user profile data again
   };
 
+  const handleReload = () => {
+    setLoading(true);
+
+    fecthUserProfile();
+    setShowEditAvatar(false);
+  };
+
   if (!userProfile) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -129,14 +136,15 @@ const UserProfile = ({ item }) => {
 
         {showEditAvatar && (
           <>
-            <div className="my-6 text-center border-b border-blueGray-200"></div>
-            <AvatarImageUpload></AvatarImageUpload>
-            <button
-              className="bg-error max-w-[400px] mx-auto w-full rounded-lg px-4 py-2 text-white mt-4 hover:bg-emerald-400"
-              onClick={handleEditAvatar}
-            >
-              Close Edit Avatar
-            </button>
+            <div className="mx-auto flex flex-col w-full dark:bg-darkSecondary bg-whiteSoft max-w-[800px] mt-10 border dark:border-white border-primary p-6 rounded-2xl">
+              <AvatarImageUpload reload={handleReload}></AvatarImageUpload>
+              <button
+                className="bg-error max-w-[400px] mx-auto w-full rounded-lg px-4 py-2 text-white hover:bg-emerald-400"
+                onClick={handleEditAvatar}
+              >
+                Close Edit Avatar
+              </button>
+            </div>
           </>
         )}
         {showEditProfile && (

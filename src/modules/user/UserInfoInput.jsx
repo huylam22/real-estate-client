@@ -22,7 +22,7 @@ const UserInfoInput = () => {
     console.log("edit profile", values);
   };
   return (
-    <div className="mx-auto w-full max-w-[800px] mt-10 border border-white p-6 rounded-2xl">
+    <div className="mx-auto w-full dark:bg-darkSecondary bg-whiteSoft max-w-[800px] mt-10 border dark:border-white border-primary p-6 rounded-2xl">
       <div className="text-center">
         <h1 className="py-4 font-bold  px-14 text-text2 bg-text4 dark:bg-softDark dark:text-white bg-opacity-5 rounded-xl text-[25px] inline-block mb-10">
           Your Profile Info 📌
