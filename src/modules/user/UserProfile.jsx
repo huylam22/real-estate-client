@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import AvatarImageUpload from "../../components/image/AvatarImageUpload";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
@@ -68,12 +68,11 @@ const UserProfile = ({ item }) => {
     fecthUserProfile(); // Call the function to fetch user profile data again
   };
 
-  const handleReload = () => {
+  const handleReload = useCallback(() => {
     setLoading(true);
-
     fecthUserProfile();
     setShowEditAvatar(false);
-  };
+  }, [userProfile]);
 
   if (!userProfile) {
     return (
@@ -108,7 +107,6 @@ const UserProfile = ({ item }) => {
 
   async function deleteProperty(id) {
     const res = await axiosPrivate.delete(`api/v1/delete/${id}`);
-    // console.log(res);
     fecthUserProfile();
   }
   return (

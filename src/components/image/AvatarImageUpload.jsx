@@ -22,7 +22,7 @@ const AvatarImageUpload = ({ reload = () => {} }) => {
     const bodyFormData = new FormData();
     bodyFormData.append("file", selectedImage);
     bodyFormData.append("email", email);
-    console.log(bodyFormData);
+    // console.log(bodyFormData);
     try {
       // Your upload API endpoint
       const response = await axios.post(

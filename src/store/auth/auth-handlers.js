@@ -28,7 +28,7 @@ export default function* handleAuthRegister(action) {
     }
     // console.log(response);
   } catch (error) {
-    toast.error(error);
+    toast.error(error.response.data.errorMessage);
   }
   yield 1;
 }
@@ -49,7 +49,7 @@ function* handleAuthLogin(action) {
     toast.success("Login successfully!");
   } catch (error) {
     console.log(error);
-    toast.error(error.errorMessage);
+    toast.error(error.response.data.errorMessage);
   }
   yield 1;
 }

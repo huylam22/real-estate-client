@@ -71,4 +71,4 @@ const PropertyList = ({
   );
 };
 
-export default PropertyList;
+export default React.memo(PropertyList);

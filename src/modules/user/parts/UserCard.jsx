@@ -1,11 +1,11 @@
 import React from "react";
-import Card from "./Card";
+import CardWrapper from "./Card";
 import { propertyAPI } from "../../../api/propertyApi";
 
 const UserCard = ({ item }) => {
   return (
     <>
-      <Card>
+      <CardWrapper>
         <div className="flex items-center gap-x-10">
           <img
             alt={item.username}
@@ -15,20 +15,20 @@ const UserCard = ({ item }) => {
                 : "https://cdn.dribbble.com/userupload/10561404/file/original-e8dbec299febee196a76dd3a25f32ef2.png?resize=1504x1129"
             }
             loading="lazy"
-            className="shadow-xl lg:w-32 h-28 w-28 ml-2 object-cover rounded-full lg:h-32 border-none"
+            className="object-cover ml-2 border-none rounded-full shadow-xl lg:w-32 h-28 w-28 lg:h-32"
           />
-          <div className="mr-4 p-3 flex flex-col items-center justify-center text-center gap-2">
-            <span className="lg:text-3xl text-base font-bold block uppercase tracking-widest text-blueGray-600">
+          <div className="flex flex-col items-center justify-center gap-2 p-3 mr-4 text-center">
+            <span className="block text-base font-bold tracking-widest uppercase lg:text-3xl text-blueGray-600">
               {item.firstname} {item.lastname}
             </span>
-            <div className="flex items-center gap-x-2 border-b pb-2 border-blueGray-200">
+            <div className="flex items-center pb-2 border-b gap-x-2 border-blueGray-200">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="lg:w-7 lg:h-7 w-5 h-5"
+                className="w-5 h-5 lg:w-7 lg:h-7"
               >
                 <path
                   strokeLinecap="round"
@@ -37,16 +37,16 @@ const UserCard = ({ item }) => {
                 />
               </svg>
 
-              <span className="lg:text-sm text-xs font-semibold block uppercase tracking-widest text-blueGray-400">
+              <span className="block text-xs font-semibold tracking-widest uppercase lg:text-sm text-blueGray-400">
                 Verified
               </span>
             </div>
-            <span className="text-whiteSoft font-light">
+            <span className="font-light text-whiteSoft">
               <strong className="font-bold">Contact:</strong> {item.username}
             </span>
           </div>
         </div>
-      </Card>
+      </CardWrapper>
     </>
   );
 };
